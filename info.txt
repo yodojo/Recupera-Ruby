@@ -1,0 +1,1 @@
+para executar os exemplos do rspec, rodar primeiro um bundle install e depois rake spec
