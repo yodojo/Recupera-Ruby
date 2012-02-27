@@ -14,13 +14,36 @@ class Instancia
   	@sequencia.size == @quantidade_de_numeros_da_sequencia
   end
 
-  def analisa_entrada
-  	verifica_se_a_sequencia_contem_numeros_para_somar
-  	@retorno
+  def analisa_sequencia
+    verificacao_para_sequencia_de_um_numero	if @sequencia.size == 1
+    verificacao_para_sequencia_de_dois_numeros if @sequencia.size == 2
+    verificacao_para_sequencia_de_varios_numeros if @sequencia.size > 2
+    @retorno
   end
 
-  def verifica_se_a_sequencia_contem_numeros_para_somar
-  	@retorno << "0" if @sequencia.size < 2
+  def verificacao_para_sequencia_de_um_numero
+  	@retorno << "0"
+  end
+
+  def verificacao_para_sequencia_de_dois_numeros
+    if @sequencia.first == @sequencia.last
+      @retorno << @sequencia.first.to_s
+    else
+      @retorno << "não achei"
+    end
+  end
+
+  def verificacao_para_sequencia_de_varios_numeros
+    @sequencia.each_with_index do |numero_atual, indice|
+      if soma_dos_numeros_anteriores(indice) == numero_atual
+        return @retorno << numero_atual.to_s 
+      end
+    end
+    @retorno << "não achei"
+  end
+
+  def soma_dos_numeros_anteriores indice
+    @sequencia[indice -1] + @sequencia[indice -2] if indice > 1
   end
 
 end
